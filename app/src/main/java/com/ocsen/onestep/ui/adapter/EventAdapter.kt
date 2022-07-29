@@ -1,42 +1,37 @@
 package com.ocsen.onestep.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ocsen.onestep.data.entities.ItemDetail
+import com.example.data.local.entities.LocalPlace
+import com.ocsen.onestep.Utils.DateTimeUtils
 import com.ocsen.onestep.databinding.CustomItemBinding
 
 class EventAdapter(
 
     private val onItemClickListener: OnItemClickListener
-) : ListAdapter<ItemDetail, EventAdapter.EventViewHolder>(object :
-    DiffUtil.ItemCallback<ItemDetail>() {
-    override fun areItemsTheSame(oldItem: ItemDetail, newItem: ItemDetail): Boolean {
+) : ListAdapter<LocalPlace, EventAdapter.EventViewHolder>(object :
+    DiffUtil.ItemCallback<LocalPlace>() {
+    override fun areItemsTheSame(oldItem: LocalPlace, newItem: LocalPlace): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: ItemDetail, newItem: ItemDetail): Boolean {
+    override fun areContentsTheSame(oldItem: LocalPlace, newItem: LocalPlace): Boolean {
         return oldItem.equals(newItem)
 
     }
 }) {
 
     interface OnItemClickListener {
-        fun onItemClick(item: ItemDetail)
+        fun onItemClick(item: LocalPlace)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-         val isActive=true
         val binding = CustomItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return if (isActive) {
-            ActiveEventViewHolder(binding)
-        } else {
-            RecommendEventViewHolder(binding)
-        }
+        return ActiveEventViewHolder(binding)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -66,10 +61,10 @@ class EventAdapter(
 //                layoutParams.rightMargin = dp2px(10F)
 //            }
 //            binding.btnContinue.visibility = View.VISIBLE
-      //      binding.descEvent.visibility = View.GONE
+            //      binding.descEvent.visibility = View.GONE
         }
 
-        override fun bind(item: ItemDetail, position: Int) {
+        override fun bind(item: LocalPlace, position: Int) {
             super.bind(item, position)
             val layoutParams = binding.layoutItemEvent.layoutParams as ViewGroup.MarginLayoutParams
 //            if (position == 0) {
@@ -85,34 +80,6 @@ class EventAdapter(
 
 
     }
-
-    inner class RecommendEventViewHolder(binding: CustomItemBinding) :
-        EventViewHolder(binding, onItemClickListener) {
-        init {
-            val layoutParams = binding.layoutItemEvent.layoutParams as ViewGroup.MarginLayoutParams
-//            layoutParams.bottomMargin = dp2px(10F)
-//            binding.btnGetStarted.visibility = View.VISIBLE
-        }
-
-        override fun bind(item: ItemDetail, position: Int) {
-            super.bind(item, position)
-//            if (!item.rewards.isNullOrEmpty()) {
-//                val sortedRewards = item.rewards.sortedByDescending { it.numPoint }
-//                binding.rewardEvent.text = itemView.context.getString(
-//                    R.string.title_win_up_to,
-//                    convertBobToCompactNotationString(sortedRewards.first().numPoint)
-//                )
-//            }
-//            downloadImage(item, mapPhotoDetail) { getImageUrlFromId(it, position) }
-//            if (!item.status.isNullOrEmpty()) {
-//                if (item.status.equals(CommonConstant.EventStatus.DRAFT.type))
-//                    binding.tvRolloutToAdmins.visibility = View.VISIBLE
-//                else
-//                    binding.tvRolloutToAdmins.visibility = View.GONE
-//            }
-        }
-    }
-
 
     open class EventViewHolder(
         val binding: CustomItemBinding,
@@ -131,13 +98,17 @@ class EventAdapter(
             bindPhoto("", binding.imvEvent)
         }
 
-        open fun bind(item: ItemDetail, position: Int) {
-//            binding.txtTitleEvent.text = Util.parseHtmlToStyledTextOrEmpty(item.title)
+        open fun bind(item: LocalPlace, position: Int) {
+            binding.txtTitleEvent.text = item.title
+            binding.tvDateTime.text = DateTimeUtils.getDateString(item.timestamp)
 //            binding.descEvent.text = Util.parseHtmlToStyledTextOrEmpty(item.shortDesc)
 //            binding.btnContinue.setOnClickListener { onItemClickListener.onItemClick(item) }
             binding.btnGetStarted.setOnClickListener { onItemClickListener.onItemClick(item) }
-        }
 
+            binding.root.setOnClickListener{
+                onItemClickListener.onItemClick(item)
+            }
+        }
 
 
         private fun bindPhoto(url: String, imageView: ImageView) {

@@ -1,6 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OneStep</string>
     <string name="title_step">Step</string>
     <string name="title_dashboard">Trips</string>
     <string name="title_history">History</string>
+    <string name="waiting_for_location">Waiting for location…</string>
+    <string name="location_lat_lng">Lat: %1$f\nLng: %2$f</string>
+    <string name="notification_channel_name">Location updates</string>
+    <string name="notification_title">Location updates</string>
+    <string name="capture_image_with_latlng">Capture (%1$f -%2$f)</string>
+    <string name="stop">Stop</string>
 </resources>

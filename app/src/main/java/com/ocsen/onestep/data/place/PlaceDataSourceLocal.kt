@@ -1,24 +1,29 @@
 package com.ocsen.onestep.data.place
 
-class PlaceDataSourceLocal : PlaceDataSource {
-    override fun insertPlace() {
-        TODO("Not yet implemented")
+import com.example.data.local.entities.LocalPlace
+import com.ocsen.onestep.data.LocalDatabase
+import com.ocsen.onestep.domain.PlaceInfo
+import javax.inject.Inject
+
+class PlaceDataSourceLocal @Inject constructor(val database: LocalDatabase) : PlaceDataSource {
+    override fun insertPlace(place:LocalPlace) {
+        database.localPlaceDao().insertLocalPlace(place)
     }
 
-    override fun updatePlace() {
-        TODO("Not yet implemented")
+    override fun updatePlace(place:LocalPlace) {
+        database.localPlaceDao().updatePlace(place)
     }
 
-    override fun deletePlace() {
-        TODO("Not yet implemented")
+    override fun deletePlace(id:String) {
+        database.localPlaceDao().deletePlace(id)
     }
 
-    override fun getListOfPlace() {
-        TODO("Not yet implemented")
+    override fun getListOfPlace():List<LocalPlace> {
+        return database.localPlaceDao().getListLocalPlace()
     }
 
-    override fun insertImageIdToPlace() {
-        TODO("Not yet implemented")
+    override fun insertImageIdToPlace(placeId:String, imgId:String) {
+
     }
 
     override fun updateImageIdToPlace() {

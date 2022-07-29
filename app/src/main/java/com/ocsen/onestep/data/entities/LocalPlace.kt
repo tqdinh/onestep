@@ -6,23 +6,24 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.ocsen.onestep.Utils.DateTimeUtils
 import kotlinx.android.parcel.Parcelize
 
 import kotlinx.serialization.SerialName
 import java.util.*
 
 @Entity(tableName = "LocalPlaceTable")
-@TypeConverters(LocalImageConverter::class)
 @Parcelize
 data class LocalPlace(
     @PrimaryKey
-    @SerialName("id") val id: String = UUID.randomUUID().toString(),
-    @SerialName("lat")
-    val lat: Double = 0.0,
-    @SerialName("lon")
-    val lon: Double = 0.0,
-    @SerialName("imgs")
-    val imgs: ArrayList<LocalImage>?= null
+    @SerialName("id")
+    val id: String = UUID.randomUUID().toString(),
+    @SerialName("timestamp")
+    val timestamp: Long = System.currentTimeMillis(),
+    @SerialName("title")
+    val title: String = "",
 
-): Parcelable
+    @SerialName("desc")
+    val desc: String = "",
+) : Parcelable
 

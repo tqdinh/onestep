@@ -1,9 +1,6 @@
 package com.ocsen.onestep.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.data.local.entities.LocalPlace
 
 @Dao
@@ -16,5 +13,8 @@ abstract class PlaceDao {
 
     @Query("DELETE FROM LocalPlaceTable WHERE id=:id")
     abstract fun deletePlace(id: String)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun updatePlace(place: LocalPlace)
 
 }
