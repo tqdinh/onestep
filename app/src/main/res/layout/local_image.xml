@@ -42,24 +42,25 @@
             app:layout_constraintLeft_toRightOf="@id/imvEvent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Phi lieng water fall" />
+            tools:text="100.72092 68.09881" />
 
         <TextView
-            android:id="@+id/txtTitleEvent"
+            android:text="2022-07-29 22:22:44"
+            android:id="@+id/timeStamp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/white"
-            android:textSize="17sp"
+            android:textSize="13dp"
             app:layout_constraintLeft_toRightOf="@id/imvEvent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLatLng"
             />
 
         <TextView
-            android:id="@+id/descLocalImage"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
