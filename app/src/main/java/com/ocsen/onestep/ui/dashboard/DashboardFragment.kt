@@ -1,5 +1,6 @@
 package com.ocsen.onestep.ui.dashboard
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -34,6 +35,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
+
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -151,6 +153,29 @@ class DashboardFragment : Fragment() {
         mapIntent.resolveActivity(requireActivity().packageManager)?.let {
             startActivity(mapIntent)
         }
+    }
+    fun showAllpointOnGoogleMap(geoPoints:ArrayList<GeoPoint>)
+    {
+        var waypoints="https://www.google.com/maps/dir/?api=1&waypoints="
+        geoPoints.forEach {
+            val latlng="${it.latitude},${it.longitude}"
+            waypoints="${waypoints}|${latlng}"
+        }
+        Log.d("WAYPOINTS",waypoints)
+//        val gmmIntentUri =
+//            Uri.parse("https://www.google.com/maps/dir/?api=1&waypoints=18.520561,73.872435|18.519254,73.876614|18.52152,73.877327|18.52019,73.879935&travelmode=driving")
+//        val intent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//        intent.setPackage("com.google.android.apps.maps")
+//        try {
+//            startActivity(intent)
+//        } catch (ex: ActivityNotFoundException) {
+//            try {
+//                val unrestrictedIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//                startActivity(unrestrictedIntent)
+//            } catch (innerEx: ActivityNotFoundException) {
+//                //Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show()
+//            }
+//        }
     }
 
     fun setupView() {
